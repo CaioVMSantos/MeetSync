@@ -9,8 +9,8 @@ public record Event(
         String description,
         String location,
         String identifier,
-        LocalDateTime start,
-        LocalDateTime end,
+        LocalDateTime startTime,
+        LocalDateTime endTime,
         Long capacity,
         EventType type,
         String organizer
