@@ -13,5 +13,4 @@ public record EventDto(
         Long capacity,
         EventType type,
         String organizer
-) {
-}
+) {}

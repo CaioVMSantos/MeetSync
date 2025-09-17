@@ -10,8 +10,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/")
 public class EventController {
 
-    CreateEventUseCase createEventUseCase;
-    EventMapper eventMapper;
+    private final CreateEventUseCase createEventUseCase;
+    private final EventMapper eventMapper;
+
+    public EventController(CreateEventUseCase createEventUseCase, EventMapper eventMapper) {
+        this.createEventUseCase = createEventUseCase;
+        this.eventMapper = eventMapper;
+    }
 
     @PostMapping("createevent")
     public EventDto createEvent(@RequestBody EventDto eventDto) {
