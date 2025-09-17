@@ -1,8 +1,11 @@
 package com.example.MeetSync.core.gateway;
 import com.example.MeetSync.core.entities.Event;
 
+import java.util.List;
+
 public interface EventGateway {
 
-    public Event createEvent(Event event);
+    Event createEvent(Event event);
+    List<Event> showEvents();
 
 }

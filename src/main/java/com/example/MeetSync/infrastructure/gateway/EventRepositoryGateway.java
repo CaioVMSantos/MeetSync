@@ -8,6 +8,8 @@ import com.example.MeetSync.infrastructure.persistence.EventRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class EventRepositoryGateway implements EventGateway {
@@ -20,5 +22,11 @@ public class EventRepositoryGateway implements EventGateway {
         EventEntity newEvent = eventRepository.save(eventMapper.toEventEntity(event));
         return eventMapper.toEvent(newEvent);
     }
+
+    @Override
+    public List<Event> showEvents() {
+        return eventRepository.findAll().stream().map(eventMapper::toEvent).toList();
+    }
+
 
 }
