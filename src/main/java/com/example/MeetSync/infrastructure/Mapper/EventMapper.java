@@ -1,5 +1,6 @@
 package com.example.MeetSync.infrastructure.Mapper;
 
+import com.example.MeetSync.core.entities.Event;
 import com.example.MeetSync.infrastructure.dtos.EventDto;
 import com.example.MeetSync.infrastructure.persistence.EventEntity;
 import org.springframework.stereotype.Component;
@@ -7,29 +8,29 @@ import org.springframework.stereotype.Component;
 @Component
 public class EventMapper {
 
-    public EventDto toDto(EventEntity event){
+    public EventDto toDto(Event event){
         if(event == null){
             return null;
         }
         return new EventDto(
-                event.getId(),
-                event.getName(),
-                event.getDescription(),
-                event.getLocation(),
-                event.getIdentifier(),
-                event.getStartTime(),
-                event.getEndTime(),
-                event.getCapacity(),
-                event.getType(),
-                event.getOrganizer()
+                event.id(),
+                event.name(),
+                event.description(),
+                event.location(),
+                event.identifier(),
+                event.startTime(),
+                event.endTime(),
+                event.capacity(),
+                event.type(),
+                event.organizer()
         );
     }
 
-    public EventEntity toEntity(EventDto eventDto){
+    public Event toEntity(EventDto eventDto){
         if(eventDto == null){
             return null;
         }
-        return new EventEntity(
+        return new Event(
                 eventDto.id(),
                 eventDto.name(),
                 eventDto.description(),

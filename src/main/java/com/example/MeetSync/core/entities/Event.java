@@ -1,6 +1,5 @@
 package com.example.MeetSync.core.entities;
 import com.example.MeetSync.core.enums.EventType;
-
 import java.time.LocalDateTime;
 
 public record Event(
