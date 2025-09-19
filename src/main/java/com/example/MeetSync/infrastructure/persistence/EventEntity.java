@@ -18,14 +18,31 @@ public class EventEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String name;
+
     private String description;
+
+    @Column(nullable = false)
     private String location;
+
+    @Column(nullable = false, unique = true)
     private String identifier;
+
+    @Column(nullable = false)
     private LocalDateTime startTime;
+
+    @Column(nullable = false)
     private LocalDateTime endTime;
+
+    @Column(nullable = false)
     private Long capacity;
+
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private EventType type;
+
+    @Column(nullable = false)
     private String organizer;
 }

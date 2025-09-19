@@ -1,5 +1,5 @@
 --v1_create_table_event.sql
-CREATE TABLE Events(
+CREATE TABLE events(
     id BIGSERIAL PRIMARY KEY ,
     name VARCHAR(255) NOT NULL,
     description TEXT,
