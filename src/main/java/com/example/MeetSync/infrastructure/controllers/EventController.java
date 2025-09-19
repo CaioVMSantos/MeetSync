@@ -5,9 +5,12 @@ import com.example.MeetSync.core.usecases.CreateEventUseCase;
 import com.example.MeetSync.core.usecases.FindEventUseCase;
 import com.example.MeetSync.infrastructure.Mapper.EventMapper;
 import com.example.MeetSync.infrastructure.dtos.EventDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -25,9 +28,12 @@ public class EventController {
     }
 
     @PostMapping("createevent")
-    public EventDto createEvent(@RequestBody EventDto eventDto) {
+    public ResponseEntity<Map<String, Object>> createEvent(@RequestBody EventDto eventDto) {
         Event newEvent = createEventUseCase.execute(eventMapper.toEntity(eventDto));
-        return eventMapper.toDto(newEvent);
+        Map<String, Object> response = new HashMap<>();
+        response.put("Mensagem: ", "Evento cadastrado com sucesso, no nosso banco de dados!");
+        response.put("Dados do Evento", eventMapper.toDto(newEvent) );
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("findevent")
