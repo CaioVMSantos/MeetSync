@@ -28,5 +28,8 @@ public class EventRepositoryGateway implements EventGateway {
         return eventRepository.findAll().stream().map(eventMapper::toEvent).toList();
     }
 
-
+    @Override
+    public boolean identifierExists(String identifier) {
+        return eventRepository.findAll().stream().anyMatch(event -> event.getIdentifier().equals(identifier));
+    }
 }
