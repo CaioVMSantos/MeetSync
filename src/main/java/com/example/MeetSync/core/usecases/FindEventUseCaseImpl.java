@@ -7,7 +7,7 @@ import java.util.List;
 
 public class FindEventUseCaseImpl implements FindEventUseCase {
 
-    private final EventGateway  eventGateway;
+    private final EventGateway eventGateway;
 
     public FindEventUseCaseImpl(EventGateway eventGateway) {
         this.eventGateway = eventGateway;

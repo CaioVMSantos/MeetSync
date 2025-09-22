@@ -1,5 +1,12 @@
 package com.example.MeetSync.infrastructure.persistence;
 
+import com.example.MeetSync.core.entities.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface EventRepository extends JpaRepository<EventEntity, Long> {}
+import java.util.Optional;
+
+public interface EventRepository extends JpaRepository<EventEntity, Long> {
+
+    Optional<Event> findByIdentifier(String identifier);
+
+}

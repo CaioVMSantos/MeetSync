@@ -1,10 +1,7 @@
 package com.example.MeetSync.infrastructure.beans;
 
 import com.example.MeetSync.core.gateway.EventGateway;
-import com.example.MeetSync.core.usecases.CreateEventUseCase;
-import com.example.MeetSync.core.usecases.CreateEventUseCaseImpl;
-import com.example.MeetSync.core.usecases.FindEventUseCase;
-import com.example.MeetSync.core.usecases.FindEventUseCaseImpl;
+import com.example.MeetSync.core.usecases.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,6 +15,11 @@ public class BeanConfiguration {
     @Bean
     public FindEventUseCase findEventUseCase(EventGateway eventGateway){
         return new FindEventUseCaseImpl(eventGateway);
+    }
+
+    @Bean
+    public FindEventByIdentifierUseCase findEventByIdentifierUseCase(EventGateway eventGateway){
+        return new FindEventByIdentifierUseCaseImpl(eventGateway);
     }
 
 }
