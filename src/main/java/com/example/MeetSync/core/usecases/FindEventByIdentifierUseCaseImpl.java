@@ -14,6 +14,8 @@ public class FindEventByIdentifierUseCaseImpl implements FindEventByIdentifierUs
 
     @Override
     public Event execute(String identifier) {
-        return eventGateway.showEventByIdentifier(identifier).orElseThrow(() -> new NotFoundEventException("Event with identifier " + identifier + " not found"));
+        return eventGateway.showEventByIdentifier(identifier).
+                orElseThrow(() -> new NotFoundEventException
+                        ("Event with identifier " + identifier + " not found"));
     }
 }

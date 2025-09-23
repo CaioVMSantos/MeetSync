@@ -5,6 +5,7 @@ import com.example.MeetSync.core.usecases.CreateEventUseCase;
 import com.example.MeetSync.core.usecases.FindEventByIdentifierUseCase;
 import com.example.MeetSync.core.usecases.FindEventUseCase;
 import com.example.MeetSync.infrastructure.Mapper.EventMapper;
+import com.example.MeetSync.infrastructure.dtos.CreateEventoRequestDto;
 import com.example.MeetSync.infrastructure.dtos.EventDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,12 +33,25 @@ public class EventController {
     }
 
     @PostMapping("createevent")
-    public ResponseEntity<Map<String, Object>> createEvent(@RequestBody EventDto eventDto) {
-        Event newEvent = createEventUseCase.execute(eventMapper.toEntity(eventDto));
-        Map<String, Object> response = new HashMap<>();
-        response.put("Mensagem: ", "Evento cadastrado com sucesso, no nosso banco de dados!");
-        response.put("Dados do Evento", eventMapper.toDto(newEvent) );
-        return ResponseEntity.ok(response);
+    public ResponseEntity<Map<String, Object>> createEvent(@RequestBody CreateEventoRequestDto eventDto) {
+
+        CreateEventUseCase.CreateEventInput input = new CreateEventUseCase.CreateEventInput(
+                eventDto.name(),
+                eventDto.description(),
+                eventDto.location(),
+                eventDto.startTime(),
+                eventDto.endTime(),
+                eventDto.capacity(),
+                eventDto.type(),
+                eventDto.organizer()
+        );
+
+        Event newEvent = createEventUseCase.execute(input);
+        Map<String, Object> response = Map.of(
+                "Message", "Event successfully registered!",
+                "Event Data", eventMapper.toDto(newEvent)
+        );
+        return  ResponseEntity.ok(response);
     }
 
     @GetMapping("findevent")

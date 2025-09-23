@@ -37,9 +37,8 @@ public class EventRepositoryGateway implements EventGateway {
         return eventRepository.findByIdentifier(identifier);
     }
 
-
     @Override
     public boolean identifierExists(String identifier) {
-        return eventRepository.findAll().stream().anyMatch(event -> event.getIdentifier().equals(identifier));
+        return eventRepository.existsByIdentifier(identifier);
     }
 }
