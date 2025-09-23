@@ -2,6 +2,7 @@ package com.example.MeetSync.infrastructure.controllers;
 
 import com.example.MeetSync.core.entities.Event;
 import com.example.MeetSync.core.usecases.CreateEventUseCase;
+import com.example.MeetSync.core.usecases.DeleteEventByIdentifierUseCase;
 import com.example.MeetSync.core.usecases.FindEventByIdentifierUseCase;
 import com.example.MeetSync.core.usecases.FindEventUseCase;
 import com.example.MeetSync.infrastructure.Mapper.EventMapper;
@@ -10,10 +11,8 @@ import com.example.MeetSync.infrastructure.dtos.EventDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -23,12 +22,14 @@ public class EventController {
     private final CreateEventUseCase createEventUseCase;
     private final FindEventUseCase findEventUseCase;
     private final FindEventByIdentifierUseCase findEventByIdentifierUseCase;
+    private final DeleteEventByIdentifierUseCase deleteEventByIdentifierUseCase;
     private final EventMapper eventMapper;
 
-    public EventController(CreateEventUseCase createEventUseCase, FindEventUseCase findEventUseCase, FindEventByIdentifierUseCase findEventByIdentifierUseCase, EventMapper eventMapper) {
+    public EventController(CreateEventUseCase createEventUseCase, FindEventUseCase findEventUseCase, FindEventByIdentifierUseCase findEventByIdentifierUseCase, DeleteEventByIdentifierUseCase deleteEventByIdentifierUseCase, EventMapper eventMapper) {
         this.createEventUseCase = createEventUseCase;
         this.findEventUseCase = findEventUseCase;
         this.findEventByIdentifierUseCase = findEventByIdentifierUseCase;
+        this.deleteEventByIdentifierUseCase = deleteEventByIdentifierUseCase;
         this.eventMapper = eventMapper;
     }
 
@@ -63,6 +64,15 @@ public class EventController {
     public ResponseEntity<EventDto> eventById(@PathVariable String identifier){
         Event newEvent = findEventByIdentifierUseCase.execute(identifier);
         return ResponseEntity.ok(eventMapper.toDto(newEvent));
+    }
+
+    @DeleteMapping("deletebyid/{identifier}")
+    public ResponseEntity<Map<String, String>> deleteEventById(@PathVariable String identifier){
+        deleteEventByIdentifierUseCase.execute(identifier);
+        Map<String, String> response = Map.of(
+                "Message", "Event with identifier '" + identifier + "' Successfully deleted!"
+        );
+        return ResponseEntity.ok(response);
     }
 
 }

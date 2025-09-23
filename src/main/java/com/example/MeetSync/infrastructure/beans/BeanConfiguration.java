@@ -24,4 +24,9 @@ public class BeanConfiguration {
         return new FindEventByIdentifierUseCaseImpl(eventGateway);
     }
 
+    @Bean
+    public DeleteEventByIdentifierUseCase deleteEventByIdentifierUseCase(EventGateway eventGateway){
+        return new DeleteEventByIdentifierUseCaseImpl(eventGateway);
+    }
+
 }
