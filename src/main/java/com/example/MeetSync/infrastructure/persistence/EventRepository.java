@@ -8,5 +8,6 @@ import java.util.Optional;
 public interface EventRepository extends JpaRepository<EventEntity, Long> {
 
     Optional<Event> findByIdentifier(String identifier);
+    boolean existsByIdentifier(String identifier);
 
 }
