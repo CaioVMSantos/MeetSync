@@ -38,6 +38,11 @@ public class EventRepositoryGateway implements EventGateway {
     }
 
     @Override
+    public void deleteEventByIdentifier(String identifier) {
+        eventRepository.deleteByIdentifier(identifier);
+    }
+
+    @Override
     public boolean identifierExists(String identifier) {
         return eventRepository.existsByIdentifier(identifier);
     }

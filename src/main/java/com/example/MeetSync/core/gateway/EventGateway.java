@@ -9,7 +9,9 @@ public interface EventGateway {
     Event createEvent(Event event);
     List<Event> showEvents();
     Optional<Event> showEventByIdentifier(String identifier);
+    void deleteEventByIdentifier(String identifier);
     boolean identifierExists(String identifier);
+
 
 
 }
